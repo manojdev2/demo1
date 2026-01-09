@@ -11,7 +11,7 @@ export function CoverLetterAIInfoCard() {
           <p className="font-medium mb-1">AI Cover Letter Generation</p>
           <p className="text-xs">
             Select a resume and optionally a template. AI will generate a
-            personalized cover letter using OpenAI. You can edit the generated
+            personalized cover letter using Gemini. You can edit the generated
             content before saving.
           </p>
         </div>

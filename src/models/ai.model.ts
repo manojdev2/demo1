@@ -24,6 +24,7 @@ export interface AiModel {
 
 export enum AiProvider {
   OPENAI = "openai",
+  GEMINI = "gemini",
 }
 
 export enum OpenaiModel {
@@ -33,7 +34,11 @@ export enum OpenaiModel {
   // GPT4_TURBO = "gpt-4-turbo", // expensive model, but faster
 }
 
+export enum GeminiModel {
+  GEMINI_2_0_FLASH_EXP = "gemini-2.0-flash-exp",
+}
+
 export const defaultModel: AiModel = {
-  provider: AiProvider.OPENAI,
-  model: OpenaiModel.GPT3_5,
+  provider: AiProvider.GEMINI,
+  model: GeminiModel.GEMINI_2_0_FLASH_EXP,
 };

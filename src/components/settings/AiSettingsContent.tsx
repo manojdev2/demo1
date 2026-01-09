@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { AiModel, OpenaiModel } from "@/models/ai.model";
+import { AiModel, GeminiModel } from "@/models/ai.model";
 
 interface AiSettingsContentProps {
   selectedModel: AiModel;
@@ -24,22 +24,22 @@ export function AiSettingsContent({
   onSave,
 }: AiSettingsContentProps) {
   const getModelsList = () => {
-    return Object.entries(OpenaiModel);
+    return Object.entries(GeminiModel);
   };
 
   return (
     <div className="space-y-6 max-w-2xl">
       <div className="space-y-2">
         <Label htmlFor="ai-model" className="text-sm font-medium">
-          OpenAI Model
+          Gemini Model
         </Label>
         <Select value={selectedModel.model} onValueChange={setSelectedProviderModel}>
           <SelectTrigger
             id="ai-model"
-            aria-label="Select OpenAI Model"
+            aria-label="Select Gemini Model"
             className="w-full sm:w-[280px] border-border/60"
           >
-            <SelectValue placeholder="Select OpenAI Model" />
+            <SelectValue placeholder="Select Gemini Model" />
           </SelectTrigger>
           <SelectContent className="border-border/50">
             <SelectGroup>
@@ -52,7 +52,7 @@ export function AiSettingsContent({
           </SelectContent>
         </Select>
         <p className="text-xs text-muted-foreground mt-1">
-          All AI features use OpenAI. Make sure your OPENAI_API_KEY is set in
+          All AI features use Gemini. Make sure your GEMINI_API_KEY is set in
           environment variables.
         </p>
       </div>

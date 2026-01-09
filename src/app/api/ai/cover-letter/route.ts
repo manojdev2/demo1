@@ -80,27 +80,27 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
       }
     }
 
-    // Ensure OpenAI API key is set
-    if (!process.env.OPENAI_API_KEY) {
+    // Ensure Gemini API key is set
+    if (!process.env.GEMINI_API_KEY) {
       throw new ExternalServiceError(
-        "OpenAI API key is not configured. Please set OPENAI_API_KEY in your environment variables.",
-        { context: { provider: "OpenAI" } }
+        "Gemini API key is not configured. Please set GEMINI_API_KEY in your environment variables.",
+        { context: { provider: "Gemini" } }
       );
     }
 
-    // Use OpenAI model - default to gpt-4o-mini if not specified
-    const openAiModel = model || "gpt-4o-mini";
+    // Use Gemini model - default to gemini-2.0-flash-exp if not specified
+    const geminiModel = model || "gemini-2.0-flash-exp";
 
     const response = await generateCoverLetterByOpenAI(
       resume,
       job,
       template,
-      openAiModel
+      geminiModel
     );
 
     if (!response) {
       throw new ExternalServiceError("Failed to generate cover letter", {
-        context: { provider: "OpenAI" },
+        context: { provider: "Gemini" },
       });
     }
 
@@ -116,24 +116,24 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
       return NextResponse.json({ error: error.message }, { status: error.statusCode });
     }
 
-    let errorMessage = "Error generating cover letter with OpenAI.";
+    let errorMessage = "Error generating cover letter with Gemini.";
     let statusCode = 502;
 
     if (error instanceof Error) {
-      if (error.message.includes("OPENAI_API_KEY") || error.message.includes("API key")) {
-        errorMessage = "OpenAI API key is not configured. Please set OPENAI_API_KEY in your environment variables.";
+      if (error.message.includes("GEMINI_API_KEY") || error.message.includes("API key")) {
+        errorMessage = "Gemini API key is not configured. Please set GEMINI_API_KEY in your environment variables.";
         statusCode = 500;
       } else if (error.message.includes("fetch") || error.message.includes("Failed to fetch") || error.message.includes("ECONNREFUSED")) {
-        errorMessage = "Failed to connect to OpenAI API. Please check your internet connection and API key.";
+        errorMessage = "Failed to connect to Gemini API. Please check your internet connection and API key.";
         statusCode = 502;
       } else if (error.message.includes("401") || error.message.includes("Unauthorized")) {
-        errorMessage = "Invalid OpenAI API key. Please check your API key.";
+        errorMessage = "Invalid Gemini API key. Please check your API key.";
         statusCode = 401;
       } else if (error.message.includes("429") || error.message.includes("rate limit")) {
-        errorMessage = "OpenAI API rate limit exceeded. Please try again later.";
+        errorMessage = "Gemini API rate limit exceeded. Please try again later.";
         statusCode = 429;
       } else {
-        errorMessage = `OpenAI Error: ${error.message}`;
+        errorMessage = `Gemini Error: ${error.message}`;
       }
     }
 

@@ -25,12 +25,12 @@ export function CoverLetterAIGenerateButton({
         {generating ? (
           <>
             <Loading />
-            <span className="ml-2">Generating with OpenAI...</span>
+            <span className="ml-2">Generating with Gemini...</span>
           </>
         ) : (
           <>
             <Sparkles className="h-4 w-4 mr-2" />
-            Generate with AI (OpenAI)
+            Generate with AI (Gemini)
           </>
         )}
       </Button>
