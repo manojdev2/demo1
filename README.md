@@ -2,7 +2,7 @@
 
 ## 🚀 Live Demo
 
-Try Anentaa in action: **[https://careerhub.us](https://careerhub.us)**
+Try Anentaa in action:
 
 ---
 
